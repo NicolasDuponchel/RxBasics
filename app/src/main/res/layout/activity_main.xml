@@ -10,97 +10,29 @@
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="6dp"
-        >
+        android:paddingTop="6dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/layout_completable_install"
+            layout="@layout/layout_completable_install"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btn_single_joke"
-            android:layout_alignTop="@+id/btn_single_joke"
-            android:layout_margin="6dp"
-            android:gravity="center"
-            android:text="SINGLE EXAMPLE"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="6dp" />
 
-        <Button
-            android:id="@+id/btn_single_joke"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/layout_single_joke"
+            layout="@layout/layout_single_joke"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="6dp"
-            android:onClick="randomJoke"
-            android:text="new joke"
-            android:textSize="10sp" />
+            android:layout_below="@+id/layout_completable_install"
+            android:layout_marginBottom="6dp" />
 
-        <ProgressBar
-            android:id="@+id/loader_single_joke"
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/layout_observable_jokes"
+            layout="@layout/layout_observable_jokes"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btn_single_joke"
-            android:layout_alignTop="@+id/btn_single_joke"
-            android:layout_margin="6dp"
-            android:layout_toStartOf="@+id/btn_single_joke"
-            android:theme="@style/AppTheme"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tv_single_joke"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_single_joke"
-            android:layout_margin="6dp"
-            android:minHeight="60dp"
-            android:textSize="12sp"
-            tools:text="Random joke" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btn_jokes"
-            android:layout_alignTop="@+id/btn_jokes"
-            android:layout_below="@+id/tv_single_joke"
-            android:layout_margin="6dp"
-            android:gravity="center"
-            android:text="OBSERVABLE EXAMPLE"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_jokes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/tv_single_joke"
-            android:layout_margin="6dp"
-            android:onClick="randomJokes"
-            android:text="new jokes"
-            android:textSize="10sp" />
-
-        <ProgressBar
-            android:id="@+id/loader_jokes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btn_jokes"
-            android:layout_alignTop="@+id/btn_jokes"
-            android:layout_margin="6dp"
-            android:layout_toStartOf="@+id/btn_jokes"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/tv_jokes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_jokes"
-            android:layout_margin="6dp"
-            android:textSize="12sp"
-            tools:text="Random jokes" />
+            android:layout_below="@+id/layout_single_joke" />
 
     </RelativeLayout>
 

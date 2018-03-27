@@ -22,22 +22,43 @@ class MainActivity : AppCompatActivity() {
 
     fun randomJoke(view: View) = viewModel.onJokeRequest()
 
+    fun randomJokes(view: View) = viewModel.onJokesRequest()
+
     private fun observeViewModel() {
-        viewModel.loadingStatus.observe(this, Observer {
+        viewModel.jokeLoadingStatus.observe(this, Observer {
             when (it) {
                 LOADING -> {
-                    loader_joke.show()
-                    btn_joke.disable()
+                    loader_single_joke.show()
+                    btn_single_joke.disable()
                 }
                 NOT_LOADING -> {
-                    loader_joke.hide()
-                    btn_joke.enable()
+                    loader_single_joke.hide()
+                    btn_single_joke.enable()
                 }
             }
         })
 
         viewModel.joke.observe(this, Observer {
-            tv_joke.text = it ?: EMPTY_STRING
+            tv_single_joke.text = it ?: EMPTY_STRING
+        })
+
+
+
+        viewModel.jokesLoadingStatus.observe(this, Observer {
+            when (it) {
+                LOADING -> {
+                    loader_jokes.show()
+                    btn_jokes.disable()
+                }
+                NOT_LOADING -> {
+                    loader_jokes.hide()
+                    btn_jokes.enable()
+                }
+            }
+        })
+
+        viewModel.jokes.observe(this, Observer {
+            tv_jokes.text = it?.toJokeString() ?: EMPTY_STRING
         })
     }
 

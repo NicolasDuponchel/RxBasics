@@ -18,6 +18,11 @@ inline fun <reified T : ViewModel> AppCompatActivity.viewModel(crossinline facto
 }
 
 
+fun Collection<String>.toJokeString(): String =
+        StringBuilder().apply { this@toJokeString.forEach { append("$it\n\n") } }.toString()
+
+
+
 fun View.hide() {
     visibility = GONE
 }

@@ -20,7 +20,7 @@ class MainViewModel : ViewModel() {
 
     private val singleRandomJoke by lazy {
         jokeApiService.randomJoke()
-                .map { it.joke }
+            .map { it.joke }
     }
 
     enum class LoadingStatus { LOADING, NOT_LOADING }
@@ -57,42 +57,42 @@ class MainViewModel : ViewModel() {
     }
 
     fun onJokeRequest() = singleRandomJoke
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .doOnSubscribe { _jokeLoadingStatus.postValue(LOADING) }
-            .doFinally { _jokeLoadingStatus.postValue(NOT_LOADING) }
-            .subscribeBy(
-                    onSuccess = { _joke.postValue(it.jokeText) },
-                    onError = { _joke.postValue(it.message) }
-            )
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+        .doOnSubscribe { _jokeLoadingStatus.postValue(LOADING) }
+        .doFinally { _jokeLoadingStatus.postValue(NOT_LOADING) }
+        .subscribeBy(
+            onSuccess = { _joke.postValue(it.jokeText) },
+            onError = { _joke.postValue(it.message) }
+        )
 
     fun onJokesRequest() = singleRandomJoke.toObservable()
-            .repeat(5)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .doOnSubscribe {
-                _jokes.postValue(emptyList())
-                _jokesLoadingStatus.postValue(LOADING)
-            }
-            .doFinally { _jokesLoadingStatus.postValue(NOT_LOADING) }
-            .subscribeBy(
-                    onNext = { _jokes.postValue(_jokes.value?.plus(it.jokeText)) },
-                    onError = {
-                        _jokes.postValue(
-                                it.message?.let {
-                                    _jokes.value?.plus(it)
-                                } ?: emptyList())
-                    },
-                    onComplete = { }
-            )
+        .repeat(5)
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+        .doOnSubscribe {
+            _jokes.postValue(emptyList())
+            _jokesLoadingStatus.postValue(LOADING)
+        }
+        .doFinally { _jokesLoadingStatus.postValue(NOT_LOADING) }
+        .subscribeBy(
+            onNext = { _jokes.postValue(_jokes.value?.plus(it.jokeText)) },
+            onError = {
+                _jokes.postValue(
+                    it.message?.let {
+                        _jokes.value?.plus(it)
+                    } ?: emptyList())
+            },
+            onComplete = { }
+        )
 
     fun onFakeInstall() = Completable.timer(3, TimeUnit.SECONDS)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .doOnSubscribe { _installLoadingStatus.postValue(LOADING) }
-            .doFinally { _installLoadingStatus.postValue(NOT_LOADING) }
-            .subscribeBy(
-                    onComplete = { _installation.postValue(SUCCESS) },
-                    onError = { _installation.postValue(ERROR) }
-            )
+        .subscribeOn(Schedulers.io())
+        .observeOn(Schedulers.io())
+        .doOnSubscribe { _installLoadingStatus.postValue(LOADING) }
+        .doFinally { _installLoadingStatus.postValue(NOT_LOADING) }
+        .subscribeBy(
+            onComplete = { _installation.postValue(SUCCESS) },
+            onError = { _installation.postValue(ERROR) }
+        )
 }

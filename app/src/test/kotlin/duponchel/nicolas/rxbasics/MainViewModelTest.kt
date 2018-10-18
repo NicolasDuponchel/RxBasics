@@ -9,11 +9,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 
 class MainViewModelTest {
 
     @get:Rule
-    val mockitoRule = MockitoJUnit.rule()
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
     val taskExecutorRule = InstantTaskExecutorRule()
